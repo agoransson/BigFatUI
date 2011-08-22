@@ -20,8 +20,8 @@ import se.goransson.andreas.simplewidgets.R;
 /**
  * Custom button that contains an image, and a text.
  * 
- * Add the following namespace attribute to your layout. xmlns:ag_components=
- * "http://schemas.android.com/apk/res/<INSERT_YOUR_APPS_PACKAGE_NAME_HERE>"
+ * Add the following namespace attribute to your layout. 
+ * xmlns:simplewidgets="http://schemas.android.com/apk/res/<INSERT_YOUR_APPS_PACKAGE_NAME_HERE>"
  * 
  * XML Layout attributes for this component:
  * 
@@ -39,7 +39,7 @@ import se.goransson.andreas.simplewidgets.R;
  */
 public class ImageTextButton extends View {
 
-	private final static String TAG = "MedeaButton";
+	private final static String TAG = "ImageTextButton";
 
 	private final static int WIDTH_PADDING = 8;
 	private final static int HEIGHT_PADDING = 10;
