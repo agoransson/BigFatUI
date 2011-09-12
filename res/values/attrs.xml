@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-     <declare-styleable name="ImageTextButton">
-        <attr name="text" format="string" />
-        <attr name="image" format="integer" />
-        <attr name="text_font" format="string" />
-        <attr name="text_style" format="string" />
-        <attr name="text_size" format="integer" />
-    </declare-styleable>
-    
+	<declare-styleable name="ImageTextButton">
+		<attr name="text" format="string" />
+		<attr format="integer" name="image"/>
+		<attr name="text_font" format="string" />
+		<attr name="text_style" format="string" />
+		<attr name="text_size" format="integer" />
+	</declare-styleable>
+
+	<declare-styleable name="ShadedImageButton">
+		<attr format="integer" name="icon"/>
+	</declare-styleable>
+
 </resources>
