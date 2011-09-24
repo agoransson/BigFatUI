@@ -13,4 +13,10 @@
 		<attr format="integer" name="icon"/>
 	</declare-styleable>
 
+	<declare-styleable name="BigProgressbar">
+		<attr format="color" name="barcolor" />
+		<attr format="integer" name="textsize" />
+		<attr format="boolean" name="countdown" />
+	</declare-styleable>
+
 </resources>

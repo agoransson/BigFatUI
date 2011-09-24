@@ -10,6 +10,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -41,22 +42,9 @@ public class ShadedImageButton extends View {
 		mContext = context;
 
 		if (isInEditMode()) {
-			/* Load the values from the xml layout */
-			TypedArray xml_attrs = context.obtainStyledAttributes(attrs,
-					R.styleable.ShadedImageButton);
-
-			Drawable iconDrawable = xml_attrs
-					.getDrawable(R.styleable.ShadedImageButton_icon);
-			if (iconDrawable != null)
-				icon = ((BitmapDrawable) iconDrawable).getBitmap();
-			else
-				icon = BitmapFactory.decodeResource(mContext.getResources(),
-						R.drawable.icon);
-
-			this.setBackgroundResource(R.drawable.shadebuttondark);
-			iconPaint = new Paint();
+			setup(attrs);
 		} else {
-			loadButtonWithAttrs(attrs);
+			setup(attrs);
 		}
 	}
 
@@ -65,22 +53,9 @@ public class ShadedImageButton extends View {
 		mContext = context;
 
 		if (isInEditMode()) {
-			/* Load the values from the xml layout */
-			TypedArray xml_attrs = context.obtainStyledAttributes(attrs,
-					R.styleable.ShadedImageButton);
-
-			Drawable iconDrawable = xml_attrs
-					.getDrawable(R.styleable.ShadedImageButton_icon);
-			if (iconDrawable != null)
-				icon = ((BitmapDrawable) iconDrawable).getBitmap();
-			else
-				icon = BitmapFactory.decodeResource(mContext.getResources(),
-						R.drawable.icon);
-
-			this.setBackgroundResource(R.drawable.shadebuttondark);
-			iconPaint = new Paint();
+			setup(attrs);
 		} else {
-			loadButtonWithAttrs(attrs);
+			setup(attrs);
 		}
 	}
 
@@ -89,38 +64,42 @@ public class ShadedImageButton extends View {
 		mContext = context;
 
 		if (isInEditMode()) {
-			icon = BitmapFactory.decodeResource(mContext.getResources(),
-					R.drawable.icon);
-			this.setBackgroundResource(R.drawable.shadebuttondark);
-			iconPaint = new Paint();
+			setup(null);
 		} else {
+			setup(null);
 		}
 	}
 
 	/**
+	 * Initialize the ShadedButton with, or without, attributs from XML layout.
 	 * 
 	 * @param attrs
 	 */
-	private void loadButtonWithAttrs(AttributeSet attrs) {
-		/* Load the values from the xml layout */
-		TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
-				R.styleable.ShadedImageButton);
-
-		Drawable iconDrawable = xml_attrs
-				.getDrawable(R.styleable.ShadedImageButton_icon);
-		if (iconDrawable != null)
-			icon = ((BitmapDrawable) iconDrawable).getBitmap();
-		else
-			icon = BitmapFactory.decodeResource(mContext.getResources(),
-					R.drawable.icon);
-
+	private void setup(AttributeSet attrs) {
+		// Allways the same button background.
 		this.setBackgroundResource(R.drawable.shadebuttondark);
 		iconPaint = new Paint();
+
+		// Set default icon (android icon)
+		icon = BitmapFactory.decodeResource(mContext.getResources(),
+				R.drawable.icon);
 
 		/* Init button */
 		setFocusable(false);
 		setFocusableInTouchMode(false);
 		setClickable(true);
+
+		/* Load layout values from XML */
+		if (attrs != null) {
+			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
+					R.styleable.ShadedImageButton);
+
+			// Load selected icon
+			Drawable iconDrawable = xml_attrs
+					.getDrawable(R.styleable.ShadedImageButton_icon);
+			if (iconDrawable != null)
+				icon = ((BitmapDrawable) iconDrawable).getBitmap();
+		}
 	}
 
 	@Override
@@ -191,6 +170,11 @@ public class ShadedImageButton extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		if (!isInEditMode()) {
+			/* Filters are not supported in edit mode */
+			canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG
+					| Paint.FILTER_BITMAP_FLAG));
+		}
 		canvas.drawBitmap(icon, padding_icon_x, padding_icon_y, iconPaint);
 		super.onDraw(canvas);
 	}
