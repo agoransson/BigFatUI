@@ -198,10 +198,11 @@ public class BigProgressbar extends View {
 		float quota = (float) newValue / max;
 
 		if (!countdown) {
-			progress_bar.set(0, 0, getWidth() * quota, getHeight());
+			progress_bar.set(3, 3, (getWidth() * quota) - 3, getHeight() - 3);
 			progress_text = Integer.toString((int) (100 * quota)) + "%";
 		} else {
-			progress_bar.set(0, 0, getWidth() - (getWidth() * quota), getHeight());
+			progress_bar.set(3, 3, (getWidth() - (getWidth() * quota)) - 3,
+					getHeight() - 3);
 			progress_text = Integer.toString(100 - (int) (100 * quota)) + "%";
 		}
 
