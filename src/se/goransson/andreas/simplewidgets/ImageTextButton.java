@@ -11,7 +11,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -58,6 +57,8 @@ public class ImageTextButton extends View {
 
 	private final static String TAG = "ImageTextButton";
 
+	private Context mContext;
+
 	private final static int WIDTH_PADDING = 8;
 	private final static int HEIGHT_PADDING = 10;
 
@@ -65,74 +66,75 @@ public class ImageTextButton extends View {
 	private int imageResId;
 	private Bitmap image;
 
-	private Paint backgroundPaint, imagePaint;
-
-	private Typeface typeface;
-	private Paint textPaint = new Paint();
-
-	private boolean enabled;
+	private Paint backgroundPaint, imagePaint, textPaint;
 
 	private ColorMatrixColorFilter activeFilter;
-
 	private ColorMatrixColorFilter unactiveFilter;
 
 	public ImageTextButton(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+		this(context, null);
 	}
 
 	public ImageTextButton(Context context, AttributeSet attrs) {
-		super(context, attrs);
-
-		/* Load the values from the xml layout */
-		TypedArray a = context.obtainStyledAttributes(attrs,
-				R.styleable.ImageTextButton);
-
-		// Get the text from XML
-		CharSequence s = a.getString(R.styleable.ImageTextButton_text);
-		if (s != null) {
-			setText(s.toString());
-		}
-		// Get the image from XML
-		Drawable imageRes = a.getDrawable(R.styleable.ImageTextButton_image);
-		if (imageRes != null)
-			image = ((BitmapDrawable) imageRes).getBitmap();
-
-		// Create the typeface
-		String font = a.getString(R.styleable.ImageTextButton_text_font);
-		int style = a.getInt(R.styleable.ImageTextButton_text_style,
-				Typeface.NORMAL);
-		typeface = Typeface.create((font != null ? font : "sans"), style);
-		int fontsize = a.getInt(R.styleable.ImageTextButton_text_size, 16);
-
-		textPaint.setColor(Color.BLACK);
-		textPaint.setTypeface(typeface);
-		textPaint.setTextSize(fontsize);
-
-		a.recycle();
-
-		setFocusable(false);
-		setFocusableInTouchMode(false);
-		setClickable(true);
-		setBackgroundColor(Color.TRANSPARENT);
-
-		backgroundPaint = new Paint();
-		backgroundPaint.setColor(Color.parseColor("#00000000"));
-
-		imagePaint = new Paint();
-		ColorMatrix cm = new ColorMatrix();
-		cm.setSaturation(1);
-		activeFilter = new ColorMatrixColorFilter(cm);
-
-		cm = new ColorMatrix();
-		cm.setSaturation(0);
-		unactiveFilter = new ColorMatrixColorFilter(cm);
-
+		this(context, attrs, 0);
 	}
 
 	public ImageTextButton(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
+		mContext = context;
+
+		setup(attrs);
+
+		if (isInEditMode()) {
+			// Default editor values
+		}
+	}
+
+	/**
+	 * Initialize the button.
+	 * 
+	 * @param attrs
+	 */
+	private void setup(AttributeSet attrs) {
+
+		// Set background color
+		setBackgroundColor(Color.TRANSPARENT);
+		backgroundPaint = new Paint();
+		backgroundPaint.setColor(Color.parseColor("#00000000"));
+
+		// Image
+		imagePaint = new Paint();
+		if (!isInEditMode()) {
+			ColorMatrix cm = new ColorMatrix();
+			cm.setSaturation(1);
+			activeFilter = new ColorMatrixColorFilter(cm);
+			cm = new ColorMatrix();
+			cm.setSaturation(0);
+			unactiveFilter = new ColorMatrixColorFilter(cm);
+		}
+
+		/* Load the values from the xml layout */
+		if (attrs != null) {
+			TypedArray attributes = mContext.obtainStyledAttributes(attrs,
+					R.styleable.ImageTextButton);
+
+			// Image
+			image = ((BitmapDrawable) attributes
+					.getDrawable(R.styleable.ImageTextButton_image)).getBitmap();
+
+			// Text
+			setText(attributes.getString(R.styleable.ImageTextButton_text) != null ? attributes
+					.getString(R.styleable.ImageTextButton_text) : "a button");
+			textPaint = new Paint();
+			textPaint.setColor(Color.BLACK);
+			textPaint.setTypeface(Typeface.SANS_SERIF);
+			textPaint.setTextSize(attributes.getInt(
+					R.styleable.ImageTextButton_text_size, 20));
+
+			attributes.recycle();
+		}
+
+		setEnabled(true);
 	}
 
 	/**
@@ -142,7 +144,7 @@ public class ImageTextButton extends View {
 	 */
 	public void setText(String s) {
 		this.text = s;
-		this.invalidate();
+		invalidate();
 	}
 
 	@Override
@@ -174,7 +176,6 @@ public class ImageTextButton extends View {
 
 		canvas.drawText(text, image.getWidth(),
 				(HEIGHT_PADDING / 2) + image.getHeight() / 2, textPaint);
-
 	}
 
 	@Override
@@ -202,11 +203,23 @@ public class ImageTextButton extends View {
 				measureHeight(heightMeasureSpec));
 	}
 
+	/**
+	 * Actual width of button content.
+	 * 
+	 * @param measureSpec
+	 * @return
+	 */
 	private int measureWidth(int measureSpec) {
 		int preferred = (int) (image.getWidth() + textPaint.measureText(text));
 		return getMeasurement(measureSpec, preferred);
 	}
 
+	/**
+	 * Actual height of button content.
+	 * 
+	 * @param measureSpec
+	 * @return
+	 */
 	private int measureHeight(int measureSpec) {
 		int preferred = image.getHeight();
 		return getMeasurement(measureSpec, preferred);

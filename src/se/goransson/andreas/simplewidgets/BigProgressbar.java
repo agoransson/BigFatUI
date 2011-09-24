@@ -60,29 +60,11 @@ public class BigProgressbar extends View {
 	private boolean countdown = false;
 
 	public BigProgressbar(Context context) {
-		super(context);
-
-		mContext = context;
-
-		if (isInEditMode()) {
-			setup(null);
-			updateValue(33);
-		} else {
-			setup(null);
-		}
+		this(context, null);
 	}
 
 	public BigProgressbar(Context context, AttributeSet attrs) {
-		super(context, attrs);
-
-		mContext = context;
-
-		if (isInEditMode()) {
-			setup(attrs);
-			updateValue(33);
-		} else {
-			setup(attrs);
-		}
+		this(context, attrs, 0);
 	}
 
 	public BigProgressbar(Context context, AttributeSet attrs, int defStyle) {
@@ -90,14 +72,18 @@ public class BigProgressbar extends View {
 
 		mContext = context;
 
+		setup(attrs);
+
 		if (isInEditMode()) {
-			setup(attrs);
-			updateValue(33);
-		} else {
-			setup(attrs);
+			setProgress(33);
 		}
 	}
 
+	/**
+	 * Initialize the view
+	 * 
+	 * @param attrs
+	 */
 	private void setup(AttributeSet attrs) {
 		setBackgroundDrawable(mContext.getResources().getDrawable(
 				R.drawable.bigprogressbarbackground));
@@ -197,7 +183,6 @@ public class BigProgressbar extends View {
 					| Paint.FILTER_BITMAP_FLAG));
 		}
 		canvas.drawRoundRect(progress_bar, 5, 5, progress_bar_paint);
-
 		canvas.drawText(progress_text, getWidth() / 2 + padding_x,
 				progress_font_size, progress_text_paint);
 		super.onDraw(canvas);
@@ -215,18 +200,19 @@ public class BigProgressbar extends View {
 	/**
 	 * Set the new current value.
 	 * 
-	 * @param newValue
+	 * @param progress
 	 */
-	public void updateValue(int newValue) {
-		float quota = (float) newValue / max;
+	public void setProgress(int progress) {
+		float quota = (float) progress / max;
+		current = (int) (100 * quota);
 
 		if (!countdown) {
 			progress_bar.set(3, 3, (getWidth() * quota) - 3, getHeight() - 3);
-			progress_text = Integer.toString((int) (100 * quota)) + "%";
+			progress_text = Integer.toString(current) + "%";
 		} else {
 			progress_bar.set(3, 3, (getWidth() - (getWidth() * quota)) - 3,
 					getHeight() - 3);
-			progress_text = Integer.toString(100 - (int) (100 * quota)) + "%";
+			progress_text = Integer.toString(100 - current) + "%";
 		}
 
 		invalidate();

@@ -5,13 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -52,36 +50,22 @@ public class ShadedImageButton extends View {
 
 	private int padding_icon_x = 10, padding_icon_y = 10;
 
+	public ShadedImageButton(Context context) {
+		this(context, null);
+	}
+
+	public ShadedImageButton(Context context, AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
 	public ShadedImageButton(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		mContext = context;
 
-		if (isInEditMode()) {
-			setup(attrs);
-		} else {
-			setup(attrs);
-		}
-	}
-
-	public ShadedImageButton(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		mContext = context;
+		setup(attrs);
 
 		if (isInEditMode()) {
-			setup(attrs);
-		} else {
-			setup(attrs);
-		}
-	}
-
-	public ShadedImageButton(Context context) {
-		super(context);
-		mContext = context;
-
-		if (isInEditMode()) {
-			setup(null);
-		} else {
-			setup(null);
+			// Default values
 		}
 	}
 
@@ -173,7 +157,7 @@ public class ShadedImageButton extends View {
 			setBackgroundResource(R.drawable.shadebuttonlight);
 			break;
 		case MotionEvent.ACTION_MOVE:
-
+			// Nothing
 			break;
 		case MotionEvent.ACTION_UP:
 			setBackgroundResource(R.drawable.shadebuttondark);
@@ -192,59 +176,5 @@ public class ShadedImageButton extends View {
 		}
 		canvas.drawBitmap(icon, padding_icon_x, padding_icon_y, iconPaint);
 		super.onDraw(canvas);
-	}
-
-	/**
-	 * TODO This doesn't quite work yet... it's supposed to detect the average
-	 * brightness of the background, and then based on that value the button
-	 * should pick the correct background resource, either DARK or LIGHT resource!
-	 * 
-	 * @return
-	 */
-	private float getAverageBackgroundColor() {
-		int[] pixels;
-
-		View v = getRootView();
-		v.setDrawingCacheEnabled(true);
-		v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-		v.layout(0, 0, getMeasuredWidth(), getMeasuredHeight());
-		v.buildDrawingCache(true);
-		Bitmap bitmapFoo = v.getDrawingCache();
-
-		int height = bitmapFoo.getHeight();
-		int width = bitmapFoo.getWidth();
-
-		int avg = 0;
-
-		// scan through all pixels
-		for (int x = 0; x < width; ++x) {
-			for (int y = 0; y < height; ++y) {
-				// get pixel color
-				int pixel = bitmapFoo.getPixel(x, y);
-
-				float A = ((float) Color.alpha(pixel) / 255);
-				float R = ((float) Color.red(pixel) / 255);
-				float G = ((float) Color.green(pixel) / 255);
-				float B = ((float) Color.blue(pixel) / 255);
-
-				Log.i("HEJ", "A:" + A + " R:" + R + " G:" + G + " B:" + B);
-
-				avg += (0.2126 * R) + (0.7152 * G) + (0.0722 * B);
-			}
-		}
-
-		// for (int i = 0; i < pixels.length; i++) {
-		// int alpha = pixels[i] >> 24;
-		// int R = (pixels[i] & 0x00FF0000) >> 16;
-		// int G = (pixels[i] & 0x0000FF00) >> 8;
-		// int B = (pixels[i] & 0x000000FF);
-		//
-		// // (0.2126*R) + (0.7152*G) + (0.0722*B)
-		// avg += (0.2126 * (R / 255)) + (0.7152 * (G / 255)) + (0.0722 * (B /
-		// 255));
-		// }
-
-		return (avg / (width * height));
 	}
 }
