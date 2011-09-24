@@ -16,7 +16,7 @@ Sample Applications
 
 This library includes one sample application which showcases all the widgets.
 
-* __showcase__: A bare-bones app that demonstrates authorization, making API calls, and invoking a dialog.
+* __showcase__: A bare-bones app that shows all widgets off in different activities.
 
 
 To install a sample application into Eclipse (3.5):
