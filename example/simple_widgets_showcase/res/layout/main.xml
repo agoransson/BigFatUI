@@ -12,9 +12,9 @@
 			android:layout_height="wrap_content" simplewidgets:icon="@drawable/backup"
 			android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.ShadedImageButton>
 		<se.goransson.andreas.simplewidgets.ShadedImageButton
-			android:id="@+id/shadedImageButton1" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" simplewidgets:icon="@drawable/browser"
-			android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.ShadedImageButton>
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			simplewidgets:icon="@drawable/browser" android:layout_margin="10dp"
+			android:id="@+id/ShadedImageButton00"></se.goransson.andreas.simplewidgets.ShadedImageButton>
 	</TableRow>
 
 	<TableRow android:id="@+id/tableRow2" android:layout_gravity="center"
@@ -58,10 +58,12 @@
 		android:layout_width="match_parent" android:gravity="center">
 		<se.goransson.andreas.simplewidgets.ShadedImageButton
 			android:id="@+id/ShadedImageButton08" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" simplewidgets:icon="@drawable/store" android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.ShadedImageButton>
+			android:layout_height="wrap_content" simplewidgets:icon="@drawable/store"
+			android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.ShadedImageButton>
 		<se.goransson.andreas.simplewidgets.ShadedImageButton
 			android:id="@+id/ShadedImageButton09" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" simplewidgets:icon="@drawable/theme" android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.ShadedImageButton>
+			android:layout_height="wrap_content" simplewidgets:icon="@drawable/theme"
+			android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.ShadedImageButton>
 	</TableRow>
 
 </TableLayout>

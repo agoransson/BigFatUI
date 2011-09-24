@@ -1,5 +1,11 @@
 This library adds simple custom UI widgets to your Android application.
 
+Available components
+====================
+
+* __ShadedImageButton__: A simple image-button, with a shaded background.
+* __BigProgressbar__: A very basic progressbar.
+
 Getting Started
 ===============
 
