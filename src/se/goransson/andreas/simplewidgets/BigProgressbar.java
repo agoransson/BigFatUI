@@ -46,8 +46,8 @@ public class BigProgressbar extends View {
 	// Progressbar text
 	private String progress_text;
 	private int progress_font_size = 100;
-	private int padding_x = 0;
-	private int padding_y = 0;
+	private int text_padding_x = 0;
+	private int text_padding_y = 0;
 
 	// Progressbar values
 	private int max = 100;
@@ -88,20 +88,23 @@ public class BigProgressbar extends View {
 		setBackgroundDrawable(mContext.getResources().getDrawable(
 				R.drawable.bigprogressbarbackground));
 
+		// Progressbar settings
 		progress_bar = new RectF(0, 0, 0, 0);
 		progress_bar_paint = new Paint();
 		progress_bar_paint.setColor(Color.GREEN);
 
+		// Text settings
 		progress_text_paint = new Paint();
 		progress_text_paint.setColor(Color.WHITE);
 		progress_text_paint.setTextSize(progress_font_size);
 		progress_text_paint.setTextAlign(Align.CENTER);
 		progress_text_paint.setTypeface(Typeface.DEFAULT_BOLD);
 		progress_text = new String(current + "%");
-
+		
+		// ...more text settings (font-size)
 		FontMetrics fm = progress_text_paint.getFontMetrics();
-		padding_y = (int) fm.descent;
-		padding_x = 0;
+		text_padding_y = (int) fm.descent;
+		text_padding_x = 0;
 
 		/* Try loading xml attrs (if any set they should overwrite the default) */
 		if (attrs != null) {
@@ -115,10 +118,10 @@ public class BigProgressbar extends View {
 			// Load text size
 			progress_text_paint.setTextSize(progress_font_size = xml_attrs.getInt(
 					R.styleable.BigProgressbar_textsize, progress_font_size));
-			// ...and update padding
+			// ...and update text padding
 			fm = progress_text_paint.getFontMetrics();
-			padding_y = (int) fm.descent;
-			padding_x = 0;
+			text_padding_y = (int) fm.descent;
+			text_padding_x = 0;
 
 			// Reversed?
 			countdown = xml_attrs.getBoolean(R.styleable.BigProgressbar_countdown,
@@ -139,7 +142,7 @@ public class BigProgressbar extends View {
 	 * @return
 	 */
 	private int measureWidth(int measureSpec) {
-		int preferred = (int) (progress_text_paint.measureText(progress_text) + (2 * padding_x));
+		int preferred = (int) (progress_text_paint.measureText(progress_text) + (2 * text_padding_x));
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -150,7 +153,7 @@ public class BigProgressbar extends View {
 	 * @return
 	 */
 	private int measureHeight(int measureSpec) {
-		int preferred = (int) (progress_font_size + padding_y);
+		int preferred = (int) (progress_font_size + text_padding_y);
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -183,7 +186,7 @@ public class BigProgressbar extends View {
 					| Paint.FILTER_BITMAP_FLAG));
 		}
 		canvas.drawRoundRect(progress_bar, 5, 5, progress_bar_paint);
-		canvas.drawText(progress_text, getWidth() / 2 + padding_x,
+		canvas.drawText(progress_text, getWidth() / 2 + text_padding_x,
 				progress_font_size, progress_text_paint);
 		super.onDraw(canvas);
 	}
@@ -206,12 +209,22 @@ public class BigProgressbar extends View {
 		float quota = (float) progress / max;
 		current = (int) (100 * quota);
 
+		// Used for EditMode (No need to do the calculation if not in editmode)
+		int w = 0, h = 0;
+		if (isInEditMode()) {
+			w = (int) (progress_text_paint.measureText(progress_text) + (2 * text_padding_x));
+			h = (int)(progress_font_size + text_padding_y);
+		}
+
 		if (!countdown) {
-			progress_bar.set(3, 3, (getWidth() * quota) - 3, getHeight() - 3);
+			progress_bar.set(3, 3, ((isInEditMode() ? w : getWidth()) * quota) - 3,
+					(isInEditMode() ? h : getHeight()) - 3);
 			progress_text = Integer.toString(current) + "%";
 		} else {
-			progress_bar.set(3, 3, (getWidth() - (getWidth() * quota)) - 3,
-					getHeight() - 3);
+			progress_bar.set(3, 3,
+					((isInEditMode() ? w : getWidth()) - ((isInEditMode() ? w
+							: getWidth()) * quota)) - 3,
+					(isInEditMode() ? h : getHeight()) - 3);
 			progress_text = Integer.toString(100 - current) + "%";
 		}
 

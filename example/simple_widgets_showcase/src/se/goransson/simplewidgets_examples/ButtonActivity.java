@@ -16,7 +16,7 @@ public class ButtonActivity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.buttons);
 
 		ShadedImageButton[] buttons = new ShadedImageButton[10];
 		buttons[0] = (ShadedImageButton) findViewById(R.id.ShadedImageButton00);
@@ -43,15 +43,20 @@ public class ButtonActivity extends Activity implements OnClickListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent mIntent = null;
 		switch (item.getItemId()) {
 		case R.id.BUTTONS:
+			// Nothing to do...
 			break;
 		case R.id.PROGRESSBARS:
-			Intent progressbars = new Intent(ButtonActivity.this,
-					ProgressbarActivity.class);
-			startActivity(progressbars);
+			mIntent = new Intent(ButtonActivity.this, ProgressbarActivity.class);
+			break;
+		case R.id.SLIDERS:
+			mIntent = new Intent(ButtonActivity.this, SliderActivity.class);
 			break;
 		}
+		if (mIntent != null)
+			startActivity(mIntent);
 		return super.onOptionsItemSelected(item);
 	}
 

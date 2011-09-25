@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent" android:background="#efefef"
+	xmlns:simplewidgets="http://schemas.android.com/apk/res/se.goransson.simplewidgets_examples"
+	android:weightSum="1">
+	<TextView android:layout_height="wrap_content" android:id="@+id/textView1"
+		android:text="TextView" android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="match_parent" android:textColor="#000" android:layout_margin="10dp"></TextView>
+	<se.goransson.andreas.simplewidgets.BigSlider
+		android:id="@+id/bigSlider1" android:layout_width="match_parent"
+		android:layout_margin="10dp" android:layout_height="wrap_content"></se.goransson.andreas.simplewidgets.BigSlider>
+
+</LinearLayout>

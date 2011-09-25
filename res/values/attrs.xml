@@ -34,4 +34,7 @@
 		<attr format="integer" name="textsize" />
 		<attr format="boolean" name="countdown" />
 	</declare-styleable>
+	
+	<declare-styleable name="BigSlider">
+	</declare-styleable>
 </resources>

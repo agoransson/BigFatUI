@@ -1,5 +1,7 @@
 This library adds simple custom UI widgets to your Android application.
 
+In time this library will change name to BigFatUI.
+
 Available components
 ====================
 
@@ -41,6 +43,8 @@ Debugging
 ==========
 
 Here's a few common errors and their solutions.
+
+* __LayoutEditor Display:__ Currently the visible progress in the LayoutEditor is showing incorrect progress. In "live" mode the progress is shown correctly.
 
 * __Build error: "xxx".__
 

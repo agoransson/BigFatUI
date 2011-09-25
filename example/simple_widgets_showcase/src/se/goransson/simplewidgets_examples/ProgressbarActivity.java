@@ -18,7 +18,7 @@ public class ProgressbarActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.progress_bar);
+		setContentView(R.layout.progressbars);
 
 		small = (BigProgressbar) findViewById(R.id.bigProgressbar1);
 		big = (BigProgressbar) findViewById(R.id.bigProgressbar2);
@@ -42,15 +42,20 @@ public class ProgressbarActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent mIntent = null;
 		switch (item.getItemId()) {
 		case R.id.BUTTONS:
-			Intent progressbars = new Intent(ProgressbarActivity.this,
-					ButtonActivity.class);
-			startActivity(progressbars);
+			mIntent = new Intent(ProgressbarActivity.this, ButtonActivity.class);
 			break;
 		case R.id.PROGRESSBARS:
+			// Nothing to do...
+			break;
+		case R.id.SLIDERS:
+			mIntent = new Intent(ProgressbarActivity.this, SliderActivity.class);
 			break;
 		}
+		if (mIntent != null)
+			startActivity(mIntent);
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -71,11 +76,12 @@ public class ProgressbarActivity extends Activity {
 
 		@Override
 		protected void onProgressUpdate(Integer... values) {
-			small.updateValue(values[0]);
-			big.updateValue(values[0]);
+			small.setProgress(values[0]);
+			big.setProgress(values[0]);
 
-			reversed1.updateValue(values[0]);
-			reversed2.updateValue(values[0]);
+			reversed1.setProgress(values[0]);
+			reversed2.setProgress(values[0]);
+
 			super.onProgressUpdate(values);
 		}
 	};
