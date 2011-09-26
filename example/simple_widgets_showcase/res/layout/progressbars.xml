@@ -7,10 +7,10 @@
 	<se.goransson.andreas.simplewidgets.BigProgressbar
 		android:id="@+id/bigProgressbar1" android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:layout_margin="10dp"
-		simplewidgets:barcolor="#ff0000" simplewidgets:textsize="20"></se.goransson.andreas.simplewidgets.BigProgressbar>
+		simplewidgets:textsize="20"></se.goransson.andreas.simplewidgets.BigProgressbar>
 	<se.goransson.andreas.simplewidgets.BigProgressbar
-		android:id="@+id/bigProgressbar2"
-		android:layout_height="wrap_content" android:layout_margin="10dp" android:layout_width="match_parent"></se.goransson.andreas.simplewidgets.BigProgressbar>
+		android:id="@+id/bigProgressbar2" android:layout_height="wrap_content"
+		android:layout_margin="10dp" android:layout_width="match_parent"></se.goransson.andreas.simplewidgets.BigProgressbar>
 	<LinearLayout android:layout_width="match_parent"
 		android:id="@+id/linearLayout1" android:layout_height="wrap_content"
 		android:orientation="horizontal" android:layout_margin="10dp">

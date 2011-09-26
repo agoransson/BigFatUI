@@ -8,8 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -54,8 +54,7 @@ public class BigProgressbar extends View {
 	private int current = 0;
 
 	// Graphics
-	private RectF progress_bar;
-	private Paint progress_bar_paint;
+	private Drawable progress;
 	private Paint progress_text_paint;
 	private boolean countdown = false;
 
@@ -86,12 +85,10 @@ public class BigProgressbar extends View {
 	 */
 	private void setup(AttributeSet attrs) {
 		setBackgroundDrawable(mContext.getResources().getDrawable(
-				R.drawable.bigprogressbarbackground));
+				R.drawable.bigbackground));
 
 		// Progressbar settings
-		progress_bar = new RectF(0, 0, 0, 0);
-		progress_bar_paint = new Paint();
-		progress_bar_paint.setColor(Color.GREEN);
+		progress = mContext.getResources().getDrawable(R.drawable.bigprogressbar);
 
 		// Text settings
 		progress_text_paint = new Paint();
@@ -100,7 +97,7 @@ public class BigProgressbar extends View {
 		progress_text_paint.setTextAlign(Align.CENTER);
 		progress_text_paint.setTypeface(Typeface.DEFAULT_BOLD);
 		progress_text = new String(current + "%");
-		
+
 		// ...more text settings (font-size)
 		FontMetrics fm = progress_text_paint.getFontMetrics();
 		text_padding_y = (int) fm.descent;
@@ -111,9 +108,13 @@ public class BigProgressbar extends View {
 			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
 					R.styleable.BigProgressbar);
 
-			// Load bar color
-			progress_bar_paint.setColor(xml_attrs.getColor(
-					R.styleable.BigProgressbar_barcolor, Color.GREEN));
+			// Load progress drawable
+			progress = mContext.getResources().getDrawable(
+					xml_attrs.getInt(R.styleable.BigProgressbar_drawable,
+							R.drawable.bigprogressbar));
+			// ...and color (if specified)
+			int color = xml_attrs.getInt(R.styleable.BigProgressbar_color,
+					Color.GREEN);
 
 			// Load text size
 			progress_text_paint.setTextSize(progress_font_size = xml_attrs.getInt(
@@ -185,7 +186,11 @@ public class BigProgressbar extends View {
 			canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG
 					| Paint.FILTER_BITMAP_FLAG));
 		}
-		canvas.drawRoundRect(progress_bar, 5, 5, progress_bar_paint);
+
+		// Draw progress
+		progress.draw(canvas);
+
+		// Draw text
 		canvas.drawText(progress_text, getWidth() / 2 + text_padding_x,
 				progress_font_size, progress_text_paint);
 		super.onDraw(canvas);
@@ -213,17 +218,18 @@ public class BigProgressbar extends View {
 		int w = 0, h = 0;
 		if (isInEditMode()) {
 			w = (int) (progress_text_paint.measureText(progress_text) + (2 * text_padding_x));
-			h = (int)(progress_font_size + text_padding_y);
+			h = (int) (progress_font_size + text_padding_y);
 		}
 
 		if (!countdown) {
-			progress_bar.set(3, 3, ((isInEditMode() ? w : getWidth()) * quota) - 3,
+			this.progress.setBounds(3, 3,
+					(int) (((isInEditMode() ? w : getWidth()) * quota) - 3),
 					(isInEditMode() ? h : getHeight()) - 3);
 			progress_text = Integer.toString(current) + "%";
 		} else {
-			progress_bar.set(3, 3,
-					((isInEditMode() ? w : getWidth()) - ((isInEditMode() ? w
-							: getWidth()) * quota)) - 3,
+			this.progress.setBounds(3, 3,
+					(int) (((isInEditMode() ? w : getWidth()) - ((isInEditMode() ? w
+							: getWidth()) * quota)) - 3),
 					(isInEditMode() ? h : getHeight()) - 3);
 			progress_text = Integer.toString(100 - current) + "%";
 		}

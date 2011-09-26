@@ -9,19 +9,26 @@
 		android:text="TextView" android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_width="match_parent" android:textColor="#000"
 		android:layout_margin="10dp" android:gravity="center"></TextView>
-	<se.goransson.andreas.simplewidgets.BigSlider
-		android:layout_height="wrap_content" android:id="@+id/bigSlider2"
-		android:layout_width="match_parent" android:layout_margin="10dp"></se.goransson.andreas.simplewidgets.BigSlider>
 
 	<se.goransson.andreas.simplewidgets.BigSlider
-		android:id="@+id/bigSlider1" android:layout_width="match_parent"
-		android:layout_margin="10dp" simplewidgets:drawline="true"
-		simplewidgets:background="#efefef" simplewidgets:foreground="#00ff00"
-		android:layout_height="20dp"></se.goransson.andreas.simplewidgets.BigSlider>
+		android:id="@+id/bigSlider1" android:layout_height="100dp"
+		android:layout_width="250dp" android:layout_gravity="center"
+		simplewidgets:min="-100" simplewidgets:max="100"></se.goransson.andreas.simplewidgets.BigSlider>
 
-	<se.goransson.andreas.simplewidgets.BigSlider
-		android:id="@+id/bigSlider3" android:layout_width="match_parent"
-		android:layout_margin="10dp" android:layout_height="100dp"
-		simplewidgets:radialsize="400"></se.goransson.andreas.simplewidgets.BigSlider>
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_height="wrap_content" android:layout_width="match_parent"
+		android:layout_margin="10dp">
+
+		<se.goransson.andreas.simplewidgets.BigSlider
+			android:id="@+id/bigSlider2" android:layout_height="wrap_content"
+			android:layout_width="match_parent" android:layout_weight="1"
+			simplewidgets:value="33"></se.goransson.andreas.simplewidgets.BigSlider>
+
+		<se.goransson.andreas.simplewidgets.BigSlider
+			android:id="@+id/bigSlider3" android:layout_height="wrap_content"
+			android:layout_width="match_parent" android:layout_weight="1"
+			simplewidgets:value="66"></se.goransson.andreas.simplewidgets.BigSlider>
+
+	</LinearLayout>
 
 </LinearLayout>

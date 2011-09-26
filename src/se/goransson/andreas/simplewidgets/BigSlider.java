@@ -3,14 +3,12 @@ package se.goransson.andreas.simplewidgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.RadialGradient;
-import android.graphics.RectF;
-import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -31,6 +29,13 @@ import android.view.View;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/**
+ * A big fat slider!
+ * 
+ * @author Andreas Göransson
+ * 
+ */
 public class BigSlider extends View {
 
 	private static final String TAG = "BigSlider";
@@ -38,23 +43,18 @@ public class BigSlider extends View {
 	private Context mContext;
 
 	// Slider control
-	private float min = 0, max = 100;
-	private float value;
-	private float slider_x;
-	private float slider_w = 10;
-	private RectF sliderControl;
-	private Paint sliderControl_paint;
+	private int min = 0, max = 100;
+	private int value;
+
+	// Slider
+	private int slider_w;
+	private Drawable slider;
 
 	// Slider fill
-	private RectF sliderFill;
-	private Paint sliderFill_paint;
+	private Drawable fill;
 
 	// Attributes
 	private int border = 3;
-	private boolean drawLine = false;
-	private int backgroundColor = Color.GREEN;
-	private int foregroundColor = Color.WHITE;
-	private float radialsize = 150.0f;
 
 	// Callback handler
 	public static final int CALLBACK = 27452; // Just some semi-random numbers...
@@ -79,48 +79,54 @@ public class BigSlider extends View {
 		setup(attrs);
 
 		if (isInEditMode())
-			setValue(50);
+			setValue(33);
 		else
-			setValue(0);
+			setValue(value);
 	}
 
 	private void setup(AttributeSet attrs) {
 		// Set background (using the same as BigProgressbar)
 		setBackgroundDrawable(mContext.getResources().getDrawable(
-				R.drawable.bigprogressbarbackground));
+				R.drawable.bigbackground));
 
-		// Slider control
-		slider_x = 0;
-		slider_w = 5;
-		sliderControl = new RectF();
-		sliderControl_paint = new Paint();
-		sliderControl_paint.setColor(Color.BLACK);
-
-		// Slider fill
-		sliderFill = new RectF();
-		sliderFill_paint = new Paint();
+		// Slider & fill
+		slider = mContext.getResources().getDrawable(R.drawable.bigslider);
+		slider_w = 10;
+		fill = mContext.getResources().getDrawable(R.drawable.bigslider_fill);
 
 		/* Load XML attributes */
 		if (attrs != null) {
 			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
 					R.styleable.BigSlider);
 
-			// Draw black line?
-			drawLine = xml_attrs.getBoolean(R.styleable.BigSlider_drawline, false);
+			// Fill
+			fill = mContext.getResources().getDrawable(
+					xml_attrs.getInt(R.styleable.BigSlider_filldrawable,
+							R.drawable.bigslider_fill));
 
-			// Colors
-			backgroundColor = xml_attrs.getColor(R.styleable.BigSlider_background,
-					Color.GREEN);
-			foregroundColor = xml_attrs.getColor(R.styleable.BigSlider_foreground,
-					Color.WHITE);
+			// Slider
+			slider = mContext.getResources().getDrawable(
+					xml_attrs.getInt(R.styleable.BigSlider_sliderdrawable,
+							R.drawable.bigslider));
+			slider_w = xml_attrs.getInt(R.styleable.BigSlider_width, 10);
 
 			// range
 			max = xml_attrs.getInt(R.styleable.BigSlider_max, 100);
 			min = xml_attrs.getInt(R.styleable.BigSlider_min, 0);
 
-			// Radial
-			radialsize = xml_attrs.getFloat(R.styleable.BigSlider_radialsize, 150.0f);
+			// Value
+			value = xml_attrs.getInt(R.styleable.BigSlider_value, 0);
 		}
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		fill.setBounds(border, border, w - border, h - border);
+
+		int x = (int) map(this.value, min, max, border + slider_w / 2, getWidth()
+				- border - slider_w / 2);
+		slider.setBounds(x - slider_w / 2, border, x + slider_w / 2, h - border);
+		super.onSizeChanged(w, h, oldw, oldh);
 	}
 
 	@Override
@@ -136,7 +142,7 @@ public class BigSlider extends View {
 	 * @return
 	 */
 	private int measureWidth(int measureSpec) {
-		int preferred = (int) (200);
+		int preferred = 200;
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -147,7 +153,7 @@ public class BigSlider extends View {
 	 * @return
 	 */
 	private int measureHeight(int measureSpec) {
-		int preferred = (int) (50);
+		int preferred = 50;
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -180,23 +186,19 @@ public class BigSlider extends View {
 					| Paint.FILTER_BITMAP_FLAG));
 		}
 
-		// Draw fill-gradient
-		RadialGradient gradient = new RadialGradient(
-				getPositionFromValue(getValue()), getHeight() / 2, radialsize,
-				foregroundColor, backgroundColor, Shader.TileMode.CLAMP);
-		sliderFill_paint.setShader(gradient);
-		canvas.drawRoundRect(sliderFill, 5, 5, sliderFill_paint);
+		// Draw fill
+		fill.draw(canvas);
 
-		// Draw slider control
-		if (drawLine)
-			canvas.drawRoundRect(sliderControl, 3, 3, sliderControl_paint);
+		// Draw slider
+		slider.draw(canvas);
+		// canvas.drawRoundRect(slider_bounds, 3, 3, sliderControl_paint);
 
 		super.onDraw(canvas);
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		setValue(getValueFromPosition(event.getX()));
+		setValue((int) map(event.getX(), 0, getWidth(), min, max));
 		// This is end-of-the-line for this event!
 		return true;
 	}
@@ -207,7 +209,7 @@ public class BigSlider extends View {
 	 * @param min
 	 * @param max
 	 */
-	public void setRange(float min, float max) {
+	public void setRange(int min, int max) {
 		this.min = min;
 		this.max = max;
 	}
@@ -219,36 +221,37 @@ public class BigSlider extends View {
 	 * 
 	 * @param value
 	 */
-	public void setValue(float value) {
+	public void setValue(int value) {
 		this.value = (value < min ? min : (value > max ? max : value));
 
+		// Send new value to listeners
 		if (callback_handler != null)
 			callback_handler.obtainMessage(CALLBACK, (int) this.value, 0)
 					.sendToTarget();
 
-		float x = getPositionFromValue(this.value);
-		float y = 0 + border;
+		// Update visual representation
+		int x = (int) map(this.value, min, max, border + slider_w / 2, getWidth()
+				- border - slider_w / 2);
 
-		if (drawLine)
-			sliderControl.set(x - slider_w / 2, y, x + slider_w / 2, y
-					+ (isInEditMode() ? 90 : getHeight()) - 2 * border);
+		slider.setBounds(x - slider_w / 2, border, x + slider_w / 2, getHeight()
+				- border);
 
-		sliderFill.set((int) (border), border, (int) (getWidth() - border),
-				getHeight() - border);
 		invalidate();
 	}
 
-	private float getValueFromPosition(float position) {
-		return (position / ((isInEditMode() ? 400 : getWidth()) - 2 * border))
-				* (max - min) - min;
-	}
-
-	private float getPositionFromValue(float value) {
-		return border
-				+ slider_w
-				/ 2
-				+ (value / (max - min) * ((isInEditMode() ? 400 : getWidth()) - 2
-						* border - slider_w));
+	/**
+	 * HA! Stole this one from Ben&co. over at Processing... in yo face!!!
+	 * 
+	 * @param value
+	 * @param istart
+	 * @param istop
+	 * @param ostart
+	 * @param ostop
+	 * @return
+	 */
+	static public final float map(float value, float istart, float istop,
+			float ostart, float ostop) {
+		return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 	}
 
 	/**
@@ -258,15 +261,6 @@ public class BigSlider extends View {
 	 */
 	public float getValue() {
 		return value;
-	}
-
-	/**
-	 * Get the value in relation to the range! Should return 0.0 - 1.0
-	 * 
-	 * @return
-	 */
-	public float getValueQuota() {
-		return 0;
 	}
 
 	/**
