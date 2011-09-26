@@ -7,6 +7,7 @@ Available components
 
 * __ShadedImageButton__: A simple image-button, with a shaded background.
 * __BigProgressbar__: A very basic progressbar.
+* __BigSlider__: A really simple slider (or seekbar, whichever you prefer) in a similar style as above.
 
 Getting Started
 ===============

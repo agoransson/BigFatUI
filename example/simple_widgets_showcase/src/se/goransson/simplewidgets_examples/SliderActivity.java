@@ -21,9 +21,14 @@ public class SliderActivity extends Activity {
 		setContentView(R.layout.sliders);
 
 		textView = (TextView) findViewById(R.id.textView1);
-		
-		BigSlider slider = (BigSlider) findViewById(R.id.bigSlider1);
-		slider.setCallbackHandler(mHandler);
+
+		BigSlider[] sliders = new BigSlider[3];
+		sliders[0] = (BigSlider) findViewById(R.id.bigSlider1);
+		sliders[1] = (BigSlider) findViewById(R.id.bigSlider2);
+		sliders[2] = (BigSlider) findViewById(R.id.bigSlider3);
+
+		for (int i = 0; i < sliders.length; i++)
+			sliders[i].setCallbackHandler(mHandler);
 	}
 
 	@Override

@@ -36,5 +36,11 @@
 	</declare-styleable>
 	
 	<declare-styleable name="BigSlider">
+		<attr format="boolean" name="drawline" />
+		<attr format="color" name="background" />
+		<attr format="color" name="foreground" />
+		<attr format="integer" name="max" />
+		<attr format="integer" name="min" />
+		<attr format="float" name="radialsize" />
 	</declare-styleable>
 </resources>

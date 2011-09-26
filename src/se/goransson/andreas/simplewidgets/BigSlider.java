@@ -6,12 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.RadialGradient;
 import android.graphics.RectF;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.GradientDrawable.Orientation;
+import android.graphics.Shader;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -47,11 +46,15 @@ public class BigSlider extends View {
 	private Paint sliderControl_paint;
 
 	// Slider fill
-	private GradientDrawable fill;
 	private RectF sliderFill;
 	private Paint sliderFill_paint;
 
+	// Attributes
 	private int border = 3;
+	private boolean drawLine = false;
+	private int backgroundColor = Color.GREEN;
+	private int foregroundColor = Color.WHITE;
+	private float radialsize = 150.0f;
 
 	// Callback handler
 	public static final int CALLBACK = 27452; // Just some semi-random numbers...
@@ -77,6 +80,8 @@ public class BigSlider extends View {
 
 		if (isInEditMode())
 			setValue(50);
+		else
+			setValue(0);
 	}
 
 	private void setup(AttributeSet attrs) {
@@ -94,16 +99,27 @@ public class BigSlider extends View {
 		// Slider fill
 		sliderFill = new RectF();
 		sliderFill_paint = new Paint();
-		sliderFill_paint.setColor(Color.GREEN);
-
-		// Gradient
-		fill = new GradientDrawable(Orientation.LEFT_RIGHT, new int[] {
-				Color.GREEN, Color.WHITE, Color.GREEN });
 
 		/* Load XML attributes */
 		if (attrs != null) {
 			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
 					R.styleable.BigSlider);
+
+			// Draw black line?
+			drawLine = xml_attrs.getBoolean(R.styleable.BigSlider_drawline, false);
+
+			// Colors
+			backgroundColor = xml_attrs.getColor(R.styleable.BigSlider_background,
+					Color.GREEN);
+			foregroundColor = xml_attrs.getColor(R.styleable.BigSlider_foreground,
+					Color.WHITE);
+
+			// range
+			max = xml_attrs.getInt(R.styleable.BigSlider_max, 100);
+			min = xml_attrs.getInt(R.styleable.BigSlider_min, 0);
+
+			// Radial
+			radialsize = xml_attrs.getFloat(R.styleable.BigSlider_radialsize, 150.0f);
 		}
 	}
 
@@ -165,10 +181,15 @@ public class BigSlider extends View {
 		}
 
 		// Draw fill-gradient
-		canvas.drawRect(sliderFill, sliderFill_paint);
+		RadialGradient gradient = new RadialGradient(
+				getPositionFromValue(getValue()), getHeight() / 2, radialsize,
+				foregroundColor, backgroundColor, Shader.TileMode.CLAMP);
+		sliderFill_paint.setShader(gradient);
+		canvas.drawRoundRect(sliderFill, 5, 5, sliderFill_paint);
 
 		// Draw slider control
-		canvas.drawRoundRect(sliderControl, 3, 3, sliderControl_paint);
+		if (drawLine)
+			canvas.drawRoundRect(sliderControl, 3, 3, sliderControl_paint);
 
 		super.onDraw(canvas);
 	}
@@ -208,9 +229,12 @@ public class BigSlider extends View {
 		float x = getPositionFromValue(this.value);
 		float y = 0 + border;
 
-		sliderControl.set(x - slider_w / 2, y, x + slider_w / 2, y
-				+ (isInEditMode() ? 90 : getHeight()) - 2 * border);
+		if (drawLine)
+			sliderControl.set(x - slider_w / 2, y, x + slider_w / 2, y
+					+ (isInEditMode() ? 90 : getHeight()) - 2 * border);
 
+		sliderFill.set((int) (border), border, (int) (getWidth() - border),
+				getHeight() - border);
 		invalidate();
 	}
 
