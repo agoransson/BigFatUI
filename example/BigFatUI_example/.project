@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>simple_widgets_showcase</name>
+	<name>BigFatUI_example</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -32,9 +32,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>simpleWidgets_src</name>
+			<name>BigFatUI_src</name>
 			<type>2</type>
-			<locationURI>_android_simpleWidgets_ce0c689d/src</locationURI>
+			<locationURI>_android_BigFatUI_2e474a6d/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -1,4 +1,4 @@
-package se.goransson.andreas.simplewidgets;
+package se.goransson.bigfatui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -56,6 +56,7 @@ import android.view.View;
  */
 public class ImageTextButton extends View {
 
+	@SuppressWarnings("unused")
 	private final static String TAG = "ImageTextButton";
 
 	private Context mContext;

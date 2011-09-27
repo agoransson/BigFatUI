@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="match_parent"
 	android:layout_height="match_parent" android:background="#efefef"
-	xmlns:simplewidgets="http://schemas.android.com/apk/res/se.goransson.simplewidgets_examples"
+	xmlns:bigfatui="http://schemas.android.com/apk/res/se.goransson.bigfatui_example"
 	android:weightSum="1">
 
 	<TextView android:layout_height="wrap_content" android:id="@+id/textView1"
@@ -10,24 +10,24 @@
 		android:layout_width="match_parent" android:textColor="#000"
 		android:layout_margin="10dp" android:gravity="center"></TextView>
 
-	<se.goransson.andreas.simplewidgets.BigSlider
+	<se.goransson.bigfatui.BigSlider
 		android:id="@+id/bigSlider1" android:layout_height="100dp"
 		android:layout_width="250dp" android:layout_gravity="center"
-		simplewidgets:min="-100" simplewidgets:max="100"></se.goransson.andreas.simplewidgets.BigSlider>
+		bigfatui:min="-100" bigfatui:max="100"></se.goransson.bigfatui.BigSlider>
 
 	<LinearLayout android:id="@+id/linearLayout1"
 		android:layout_width="match_parent" android:layout_margin="10dp"
 		android:layout_height="50dp">
 
-		<se.goransson.andreas.simplewidgets.BigSlider
+		<se.goransson.bigfatui.BigSlider
 			android:id="@+id/bigSlider2" android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:layout_weight="1"
-			simplewidgets:value="33" simplewidgets:filldrawable="@drawable/mysliderfilldrawable"></se.goransson.andreas.simplewidgets.BigSlider>
+			bigfatui:value="33" bigfatui:filldrawable="@drawable/mysliderfilldrawable"></se.goransson.bigfatui.BigSlider>
 
-		<se.goransson.andreas.simplewidgets.BigSlider
+		<se.goransson.bigfatui.BigSlider
 			android:id="@+id/bigSlider3" android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:layout_weight="1"
-			simplewidgets:value="66" simplewidgets:sliderdrawable="@drawable/mysliderdrawable"></se.goransson.andreas.simplewidgets.BigSlider>
+			bigfatui:value="66" bigfatui:sliderdrawable="@drawable/mysliderdrawable"></se.goransson.bigfatui.BigSlider>
 
 	</LinearLayout>
 

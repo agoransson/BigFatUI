@@ -1,4 +1,4 @@
-package se.goransson.andreas.simplewidgets;
+package se.goransson.bigfatui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,7 +8,6 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -38,6 +37,7 @@ import android.view.View;
  */
 public class BigSlider extends View {
 
+	@SuppressWarnings("unused")
 	private static final String TAG = "BigSlider";
 
 	private Context mContext;

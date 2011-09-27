@@ -1,4 +1,4 @@
-package se.goransson.andreas.simplewidgets;
+package se.goransson.bigfatui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -40,6 +40,7 @@ import android.view.View;
  */
 public class ShadedImageButton extends View {
 
+	@SuppressWarnings("unused")
 	private static final String TAG = "ShadedImageButton";
 
 	private Context mContext;

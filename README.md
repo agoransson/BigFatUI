@@ -1,6 +1,5 @@
-This library adds simple custom UI widgets to your Android application.
+This library adds custom UI widgets to your Android application ofthe BIG variety!
 
-In time this library will change name to BigFatUI.
 
 Available components
 ====================

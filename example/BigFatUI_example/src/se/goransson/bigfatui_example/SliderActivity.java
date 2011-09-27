@@ -1,6 +1,6 @@
-package se.goransson.simplewidgets_examples;
+package se.goransson.bigfatui_example;
 
-import se.goransson.andreas.simplewidgets.BigSlider;
+import se.goransson.bigfatui.BigSlider;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,6 +1,6 @@
-package se.goransson.simplewidgets_examples;
+package se.goransson.bigfatui_example;
 
-import se.goransson.andreas.simplewidgets.BigProgressbar;
+import se.goransson.bigfatui.BigProgressbar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,7 +20,7 @@ public class ProgressbarActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.progressbars);
 
-		small = (BigProgressbar) findViewById(R.id.bigProgressbar1);	
+		small = (BigProgressbar) findViewById(R.id.bigProgressbar1);
 		big = (BigProgressbar) findViewById(R.id.bigProgressbar2);
 
 		reversed1 = (BigProgressbar) findViewById(R.id.bigProgressbar3);
