@@ -109,12 +109,9 @@ public class BigProgressbar extends View {
 					R.styleable.BigProgressbar);
 
 			// Load progress drawable
-			progress = mContext.getResources().getDrawable(
-					xml_attrs.getInt(R.styleable.BigProgressbar_drawable,
-							R.drawable.bigprogressbar));
-			// ...and color (if specified)
-			int color = xml_attrs.getInt(R.styleable.BigProgressbar_color,
-					Color.GREEN);
+			if (xml_attrs.getDrawable(R.styleable.BigProgressbar_progressdrawable) != null)
+				progress = xml_attrs
+						.getDrawable(R.styleable.BigProgressbar_progressdrawable);
 
 			// Load text size
 			progress_text_paint.setTextSize(progress_font_size = xml_attrs.getInt(

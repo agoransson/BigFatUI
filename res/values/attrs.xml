@@ -30,8 +30,7 @@
 	</declare-styleable>
 
 	<declare-styleable name="BigProgressbar">
-		<attr format="color" name="color" />
-		<attr format="integer" name="drawable" />
+		<attr format="integer" name="progressdrawable" />
 		<attr format="integer" name="textsize" />
 		<attr format="boolean" name="countdown" />
 	</declare-styleable>

@@ -47,7 +47,6 @@ public class BigSlider extends View {
 	private int value;
 
 	// Slider
-	private int slider_w;
 	private Drawable slider;
 
 	// Slider fill
@@ -78,10 +77,7 @@ public class BigSlider extends View {
 
 		setup(attrs);
 
-		if (isInEditMode())
-			setValue(33);
-		else
-			setValue(value);
+		setValue(value);
 	}
 
 	private void setup(AttributeSet attrs) {
@@ -91,7 +87,6 @@ public class BigSlider extends View {
 
 		// Slider & fill
 		slider = mContext.getResources().getDrawable(R.drawable.bigslider);
-		slider_w = 10;
 		fill = mContext.getResources().getDrawable(R.drawable.bigslider_fill);
 
 		/* Load XML attributes */
@@ -100,15 +95,12 @@ public class BigSlider extends View {
 					R.styleable.BigSlider);
 
 			// Fill
-			fill = mContext.getResources().getDrawable(
-					xml_attrs.getInt(R.styleable.BigSlider_filldrawable,
-							R.drawable.bigslider_fill));
+			if (xml_attrs.getDrawable(R.styleable.BigSlider_filldrawable) != null)
+				fill = xml_attrs.getDrawable(R.styleable.BigSlider_filldrawable);
 
 			// Slider
-			slider = mContext.getResources().getDrawable(
-					xml_attrs.getInt(R.styleable.BigSlider_sliderdrawable,
-							R.drawable.bigslider));
-			slider_w = xml_attrs.getInt(R.styleable.BigSlider_width, 10);
+			if (xml_attrs.getDrawable(R.styleable.BigSlider_sliderdrawable) != null)
+				slider = xml_attrs.getDrawable(R.styleable.BigSlider_sliderdrawable);
 
 			// range
 			max = xml_attrs.getInt(R.styleable.BigSlider_max, 100);
@@ -123,9 +115,10 @@ public class BigSlider extends View {
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		fill.setBounds(border, border, w - border, h - border);
 
-		int x = (int) map(this.value, min, max, border + slider_w / 2, getWidth()
-				- border - slider_w / 2);
-		slider.setBounds(x - slider_w / 2, border, x + slider_w / 2, h - border);
+		int x = (int) map(this.value, min, max, border + slider.getIntrinsicWidth()
+				/ 2, getWidth() - border - slider.getIntrinsicWidth() / 2);
+		slider.setBounds(x - slider.getBounds().width() / 2, border, x
+				+ slider.getBounds().width() / 2, h - border);
 		super.onSizeChanged(w, h, oldw, oldh);
 	}
 
@@ -142,7 +135,7 @@ public class BigSlider extends View {
 	 * @return
 	 */
 	private int measureWidth(int measureSpec) {
-		int preferred = 200;
+		int preferred = getBackground().getIntrinsicWidth();
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -153,7 +146,7 @@ public class BigSlider extends View {
 	 * @return
 	 */
 	private int measureHeight(int measureSpec) {
-		int preferred = 50;
+		int preferred = getBackground().getIntrinsicHeight();
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -191,7 +184,6 @@ public class BigSlider extends View {
 
 		// Draw slider
 		slider.draw(canvas);
-		// canvas.drawRoundRect(slider_bounds, 3, 3, sliderControl_paint);
 
 		super.onDraw(canvas);
 	}
@@ -230,17 +222,18 @@ public class BigSlider extends View {
 					.sendToTarget();
 
 		// Update visual representation
-		int x = (int) map(this.value, min, max, border + slider_w / 2, getWidth()
-				- border - slider_w / 2);
+		int x = (int) map(this.value, min, max, border + slider.getIntrinsicWidth()
+				/ 2, getWidth() - border - slider.getIntrinsicWidth() / 2);
 
-		slider.setBounds(x - slider_w / 2, border, x + slider_w / 2, getHeight()
-				- border);
+		slider.setBounds(x - slider.getIntrinsicWidth() / 2, border,
+				x + slider.getIntrinsicWidth() / 2, getHeight() - border);
 
 		invalidate();
 	}
 
 	/**
-	 * HA! Stole this one from Ben&co. over at Processing... in yo face!!!
+	 * HA! Stole this one from Ben&co. over at Processing... in yo face, I'm an
+	 * outlaw!!
 	 * 
 	 * @param value
 	 * @param istart

@@ -16,18 +16,18 @@
 		simplewidgets:min="-100" simplewidgets:max="100"></se.goransson.andreas.simplewidgets.BigSlider>
 
 	<LinearLayout android:id="@+id/linearLayout1"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:layout_margin="10dp">
+		android:layout_width="match_parent" android:layout_margin="10dp"
+		android:layout_height="50dp">
 
 		<se.goransson.andreas.simplewidgets.BigSlider
 			android:id="@+id/bigSlider2" android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:layout_weight="1"
-			simplewidgets:value="33"></se.goransson.andreas.simplewidgets.BigSlider>
+			simplewidgets:value="33" simplewidgets:filldrawable="@drawable/mysliderfilldrawable"></se.goransson.andreas.simplewidgets.BigSlider>
 
 		<se.goransson.andreas.simplewidgets.BigSlider
 			android:id="@+id/bigSlider3" android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:layout_weight="1"
-			simplewidgets:value="66"></se.goransson.andreas.simplewidgets.BigSlider>
+			simplewidgets:value="66" simplewidgets:sliderdrawable="@drawable/mysliderdrawable"></se.goransson.andreas.simplewidgets.BigSlider>
 
 	</LinearLayout>
 

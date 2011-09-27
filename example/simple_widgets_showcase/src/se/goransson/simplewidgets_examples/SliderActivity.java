@@ -46,7 +46,7 @@ public class SliderActivity extends Activity {
 			mIntent = new Intent(SliderActivity.this, ButtonActivity.class);
 			break;
 		case R.id.PROGRESSBARS:
-			mIntent = new Intent(SliderActivity.this, ButtonActivity.class);
+			mIntent = new Intent(SliderActivity.this, ProgressbarActivity.class);
 			break;
 		case R.id.SLIDERS:
 			// Nothing to do...

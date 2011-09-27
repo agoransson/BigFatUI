@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -129,7 +130,7 @@ public class ImageTextButton extends View {
 			textPaint.setColor(Color.BLACK);
 			textPaint.setTypeface(Typeface.SANS_SERIF);
 			textPaint.setTextSize(attributes.getInt(
-					R.styleable.ImageTextButton_text_size, 20));
+					R.styleable.ImageTextButton_text_size, 16));
 
 			attributes.recycle();
 		}
@@ -169,6 +170,12 @@ public class ImageTextButton extends View {
 	 * Method called on to render the view.
 	 */
 	protected void onDraw(Canvas canvas) {
+		if (!isInEditMode()) {
+			/* Filters are not supported in edit mode */
+			canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG
+					| Paint.FILTER_BITMAP_FLAG));
+		}
+
 		canvas.drawRoundRect(new RectF(0, 0, this.getWidth(), this.getHeight()), 5,
 				5, backgroundPaint);
 

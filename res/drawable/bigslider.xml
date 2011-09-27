@@ -20,4 +20,6 @@
 	android:shape="rectangle">
 	<corners android:radius="3dp" />
 	<solid android:color="#00A600" />
+	<size android:width="10dp" />
+	
 </shape>
