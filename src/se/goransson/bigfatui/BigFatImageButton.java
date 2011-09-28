@@ -38,10 +38,10 @@ import android.view.View;
  * @author Andreas Göransson
  * 
  */
-public class ShadedImageButton extends View {
+public class BigFatImageButton extends View {
 
 	@SuppressWarnings("unused")
-	private static final String TAG = "ShadedImageButton";
+	private static final String TAG = "BigFatImageButton";
 
 	private Context mContext;
 
@@ -51,22 +51,22 @@ public class ShadedImageButton extends View {
 
 	private int padding_icon_x = 10, padding_icon_y = 10;
 
-	public ShadedImageButton(Context context) {
+	public BigFatImageButton(Context context) {
 		this(context, null);
 	}
 
-	public ShadedImageButton(Context context, AttributeSet attrs) {
+	public BigFatImageButton(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public ShadedImageButton(Context context, AttributeSet attrs, int defStyle) {
+	public BigFatImageButton(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		mContext = context;
 
 		setup(attrs);
 
 		if (isInEditMode()) {
-			// Default values
+			// Default editor values
 		}
 	}
 
@@ -77,7 +77,7 @@ public class ShadedImageButton extends View {
 	 */
 	private void setup(AttributeSet attrs) {
 		// Allways the same button background.
-		this.setBackgroundResource(R.drawable.shadebuttondark);
+		this.setBackgroundResource(R.drawable.bigbackground_square);
 		iconPaint = new Paint();
 
 		// Set default icon (android icon)
@@ -92,11 +92,16 @@ public class ShadedImageButton extends View {
 		/* Load layout values from XML */
 		if (attrs != null) {
 			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
-					R.styleable.ShadedImageButton);
+					R.styleable.BigFatImageButton);
+
+			// Load another background
+			if (xml_attrs.getDrawable(R.styleable.BigFatImageButton_background) != null)
+				setBackgroundDrawable(xml_attrs
+						.getDrawable(R.styleable.BigFatImageButton_background));
 
 			// Load selected icon
 			Drawable iconDrawable = xml_attrs
-					.getDrawable(R.styleable.ShadedImageButton_icon);
+					.getDrawable(R.styleable.BigFatImageButton_icon);
 			if (iconDrawable != null)
 				icon = ((BitmapDrawable) iconDrawable).getBitmap();
 		}
@@ -115,7 +120,8 @@ public class ShadedImageButton extends View {
 	 * @return
 	 */
 	private int measureWidth(int measureSpec) {
-		int preferred = (int) (icon.getWidth() + padding_icon_x * 2);
+		int preferred = (int) ((icon.getWidth() > icon.getHeight() ? icon
+				.getWidth() : icon.getHeight()) + padding_icon_x * 2);
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -126,7 +132,8 @@ public class ShadedImageButton extends View {
 	 * @return
 	 */
 	private int measureHeight(int measureSpec) {
-		int preferred = (int) (icon.getHeight() + padding_icon_y * 2);
+		int preferred = (int) ((icon.getHeight() > icon.getWidth() ? icon
+				.getHeight() : icon.getWidth()) + padding_icon_y * 2);
 		return getMeasurement(measureSpec, preferred);
 	}
 
@@ -155,13 +162,13 @@ public class ShadedImageButton extends View {
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			setBackgroundResource(R.drawable.shadebuttonlight);
+			getBackground().setAlpha(100);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			// Nothing
 			break;
 		case MotionEvent.ACTION_UP:
-			setBackgroundResource(R.drawable.shadebuttondark);
+			getBackground().setAlpha(255);
 			break;
 		}
 		invalidate();
@@ -175,7 +182,8 @@ public class ShadedImageButton extends View {
 			canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG
 					| Paint.FILTER_BITMAP_FLAG));
 		}
-		canvas.drawBitmap(icon, padding_icon_x, padding_icon_y, iconPaint);
+		// canvas.drawBitmap(icon, padding_icon_x, padding_icon_y, iconPaint);
+		canvas.drawBitmap(icon, null, getBackground().getBounds(), iconPaint);
 		super.onDraw(canvas);
 	}
 }

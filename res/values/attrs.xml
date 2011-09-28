@@ -25,8 +25,9 @@
 		<attr name="text_size" format="integer" />
 	</declare-styleable>
 
-	<declare-styleable name="ShadedImageButton">
+	<declare-styleable name="BigFatImageButton">
 		<attr format="integer" name="icon"/>
+		<attr format="integer" name="background" />
 	</declare-styleable>
 
 	<declare-styleable name="BigProgressbar">

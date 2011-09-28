@@ -86,7 +86,7 @@ public class BigProgressbar extends View {
 	 */
 	private void setup(AttributeSet attrs) {
 		setBackgroundDrawable(mContext.getResources().getDrawable(
-				R.drawable.bigbackground));
+				R.drawable.bigbackground_rect));
 
 		// Progressbar settings
 		progress = mContext.getResources().getDrawable(R.drawable.bigprogressbar);

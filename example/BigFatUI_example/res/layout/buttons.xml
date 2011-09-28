@@ -7,63 +7,63 @@
 
 	<TableRow android:id="@+id/tableRow1" android:gravity="center"
 		android:layout_height="wrap_content" android:layout_width="match_parent">
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton01" android:layout_width="wrap_content"
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton01" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/backup"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
-		<se.goransson.bigfatui.ShadedImageButton
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
+		<se.goransson.bigfatui.BigFatImageButton
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			bigfatui:icon="@drawable/browser" android:layout_margin="10dp"
-			android:id="@+id/ShadedImageButton00"></se.goransson.bigfatui.ShadedImageButton>
+			android:id="@+id/BigFatImageButton00"></se.goransson.bigfatui.BigFatImageButton>
 	</TableRow>
 
 	<TableRow android:id="@+id/tableRow2" android:layout_gravity="center"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:gravity="center">
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton03" android:layout_width="wrap_content"
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton03" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/contacts"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton02" android:layout_width="wrap_content"
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton02" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/document"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
 	</TableRow>
 
 	<TableRow android:id="@+id/tableRow3" android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:gravity="center">
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton04" android:layout_width="wrap_content"
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton04" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/map"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton05" android:layout_width="wrap_content"
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton05" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/music"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
 	</TableRow>
 
 	<TableRow android:id="@+id/tableRow4" android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:gravity="center">
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton06" android:layout_width="wrap_content"
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton06" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/note"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton07" android:layout_width="wrap_content"
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton07" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/setting"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
 	</TableRow>
 
 	<TableRow android:id="@+id/tableRow5" android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:gravity="center">
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton08" android:layout_width="wrap_content"
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton08" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/store"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
-		<se.goransson.bigfatui.ShadedImageButton
-			android:id="@+id/ShadedImageButton09" android:layout_width="wrap_content"
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
+		<se.goransson.bigfatui.BigFatImageButton
+			android:id="@+id/BigFatImageButton09" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" bigfatui:icon="@drawable/theme"
-			android:layout_margin="10dp"></se.goransson.bigfatui.ShadedImageButton>
+			android:layout_margin="10dp"></se.goransson.bigfatui.BigFatImageButton>
 	</TableRow>
 
 </TableLayout>

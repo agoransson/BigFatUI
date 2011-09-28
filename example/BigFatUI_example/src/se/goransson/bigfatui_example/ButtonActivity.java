@@ -1,6 +1,6 @@
 package se.goransson.bigfatui_example;
 
-import se.goransson.bigfatui.ShadedImageButton;
+import se.goransson.bigfatui.BigFatImageButton;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,17 +18,17 @@ public class ButtonActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.buttons);
 
-		ShadedImageButton[] buttons = new ShadedImageButton[10];
-		buttons[0] = (ShadedImageButton) findViewById(R.id.ShadedImageButton00);
-		buttons[1] = (ShadedImageButton) findViewById(R.id.ShadedImageButton01);
-		buttons[2] = (ShadedImageButton) findViewById(R.id.ShadedImageButton02);
-		buttons[3] = (ShadedImageButton) findViewById(R.id.ShadedImageButton03);
-		buttons[4] = (ShadedImageButton) findViewById(R.id.ShadedImageButton04);
-		buttons[5] = (ShadedImageButton) findViewById(R.id.ShadedImageButton05);
-		buttons[6] = (ShadedImageButton) findViewById(R.id.ShadedImageButton06);
-		buttons[7] = (ShadedImageButton) findViewById(R.id.ShadedImageButton07);
-		buttons[8] = (ShadedImageButton) findViewById(R.id.ShadedImageButton08);
-		buttons[9] = (ShadedImageButton) findViewById(R.id.ShadedImageButton09);
+		BigFatImageButton[] buttons = new BigFatImageButton[10];
+		buttons[0] = (BigFatImageButton) findViewById(R.id.BigFatImageButton00);
+		buttons[1] = (BigFatImageButton) findViewById(R.id.BigFatImageButton01);
+		buttons[2] = (BigFatImageButton) findViewById(R.id.BigFatImageButton02);
+		buttons[3] = (BigFatImageButton) findViewById(R.id.BigFatImageButton03);
+		buttons[4] = (BigFatImageButton) findViewById(R.id.BigFatImageButton04);
+		buttons[5] = (BigFatImageButton) findViewById(R.id.BigFatImageButton05);
+		buttons[6] = (BigFatImageButton) findViewById(R.id.BigFatImageButton06);
+		buttons[7] = (BigFatImageButton) findViewById(R.id.BigFatImageButton07);
+		buttons[8] = (BigFatImageButton) findViewById(R.id.BigFatImageButton08);
+		buttons[9] = (BigFatImageButton) findViewById(R.id.BigFatImageButton09);
 
 		for (int i = 0; i < buttons.length; i++)
 			buttons[i].setOnClickListener(this);

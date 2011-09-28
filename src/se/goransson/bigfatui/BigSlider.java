@@ -83,7 +83,7 @@ public class BigSlider extends View {
 	private void setup(AttributeSet attrs) {
 		// Set background (using the same as BigProgressbar)
 		setBackgroundDrawable(mContext.getResources().getDrawable(
-				R.drawable.bigbackground));
+				R.drawable.bigbackground_rect));
 
 		// Slider & fill
 		slider = mContext.getResources().getDrawable(R.drawable.bigslider);
