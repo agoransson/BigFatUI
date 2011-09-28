@@ -30,18 +30,22 @@
 		<attr format="integer" name="background" />
 	</declare-styleable>
 
-	<declare-styleable name="BigProgressbar">
+	<declare-styleable name="BigFatProgressbar">
 		<attr format="integer" name="progressdrawable" />
 		<attr format="integer" name="textsize" />
 		<attr format="boolean" name="countdown" />
 	</declare-styleable>
 	
-	<declare-styleable name="BigSlider">
+	<declare-styleable name="BigFatSlider">
 		<attr format="integer" name="filldrawable" />
 		<attr format="integer" name="sliderdrawable" />
 		<attr format="integer" name="width" />
 		<attr format="integer" name="max" />
 		<attr format="integer" name="min" />
 		<attr format="integer" name="value" />
+	</declare-styleable>
+	
+	<declare-styleable name="BigFatTurner">
+		<attr format="integer" name="handle" />
 	</declare-styleable>
 </resources>

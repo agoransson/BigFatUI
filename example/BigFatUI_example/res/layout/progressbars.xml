@@ -4,24 +4,24 @@
 	android:orientation="vertical" android:layout_width="match_parent"
 	android:layout_height="match_parent" android:background="#efefef">
 
-	<se.goransson.bigfatui.BigProgressbar
-		android:id="@+id/bigProgressbar1" android:layout_height="wrap_content"
+	<se.goransson.bigfatui.BigFatProgressbar
+		android:id="@+id/bigFatProgressbar1" android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:layout_margin="10dp"
-		bigfatui:textsize="20"></se.goransson.bigfatui.BigProgressbar>
-	<se.goransson.bigfatui.BigProgressbar
-		android:id="@+id/bigProgressbar2" android:layout_height="wrap_content"
-		android:layout_margin="10dp" android:layout_width="match_parent"></se.goransson.bigfatui.BigProgressbar>
+		bigfatui:textsize="20"></se.goransson.bigfatui.BigFatProgressbar>
+	<se.goransson.bigfatui.BigFatProgressbar
+		android:id="@+id/bigFatProgressbar2" android:layout_height="wrap_content"
+		android:layout_margin="10dp" android:layout_width="match_parent"></se.goransson.bigfatui.BigFatProgressbar>
 	<LinearLayout android:layout_width="match_parent"
 		android:id="@+id/linearLayout1" android:layout_height="wrap_content"
 		android:orientation="horizontal" android:layout_margin="10dp">
-		<se.goransson.bigfatui.BigProgressbar
+		<se.goransson.bigfatui.BigFatProgressbar
 			android:layout_width="wrap_content" android:layout_weight="1"
-			android:id="@+id/bigProgressbar3" android:layout_height="wrap_content"
-			bigfatui:countdown="true" bigfatui:textsize="60"></se.goransson.bigfatui.BigProgressbar>
-		<se.goransson.bigfatui.BigProgressbar
+			android:id="@+id/bigFatProgressbar3" android:layout_height="wrap_content"
+			bigfatui:countdown="true" bigfatui:textsize="60"></se.goransson.bigfatui.BigFatProgressbar>
+		<se.goransson.bigfatui.BigFatProgressbar
 			android:layout_width="wrap_content" android:layout_weight="1"
-			android:id="@+id/bigProgressbar4" android:layout_height="wrap_content"
-			bigfatui:textsize="60"></se.goransson.bigfatui.BigProgressbar>
+			android:id="@+id/bigFatProgressbar4" android:layout_height="wrap_content"
+			bigfatui:textsize="60"></se.goransson.bigfatui.BigFatProgressbar>
 	</LinearLayout>
 
 </LinearLayout>

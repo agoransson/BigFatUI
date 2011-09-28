@@ -35,7 +35,7 @@ import android.view.View;
  * @author Andreas Göransson
  * 
  */
-public class BigSlider extends View {
+public class BigFatSlider extends View {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "BigSlider";
@@ -59,15 +59,15 @@ public class BigSlider extends View {
 	public static final int CALLBACK = 27452; // Just some semi-random numbers...
 	private Handler callback_handler;
 
-	public BigSlider(Context context) {
+	public BigFatSlider(Context context) {
 		this(context, null);
 	}
 
-	public BigSlider(Context context, AttributeSet attrs) {
+	public BigFatSlider(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public BigSlider(Context context, AttributeSet attrs, int defStyle) {
+	public BigFatSlider(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		mContext = context;
 
@@ -92,22 +92,22 @@ public class BigSlider extends View {
 		/* Load XML attributes */
 		if (attrs != null) {
 			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
-					R.styleable.BigSlider);
+					R.styleable.BigFatSlider);
 
 			// Fill
-			if (xml_attrs.getDrawable(R.styleable.BigSlider_filldrawable) != null)
-				fill = xml_attrs.getDrawable(R.styleable.BigSlider_filldrawable);
+			if (xml_attrs.getDrawable(R.styleable.BigFatSlider_filldrawable) != null)
+				fill = xml_attrs.getDrawable(R.styleable.BigFatSlider_filldrawable);
 
 			// Slider
-			if (xml_attrs.getDrawable(R.styleable.BigSlider_sliderdrawable) != null)
-				slider = xml_attrs.getDrawable(R.styleable.BigSlider_sliderdrawable);
+			if (xml_attrs.getDrawable(R.styleable.BigFatSlider_sliderdrawable) != null)
+				slider = xml_attrs.getDrawable(R.styleable.BigFatSlider_sliderdrawable);
 
 			// range
-			max = xml_attrs.getInt(R.styleable.BigSlider_max, 100);
-			min = xml_attrs.getInt(R.styleable.BigSlider_min, 0);
+			max = xml_attrs.getInt(R.styleable.BigFatSlider_max, 100);
+			min = xml_attrs.getInt(R.styleable.BigFatSlider_min, 0);
 
 			// Value
-			value = xml_attrs.getInt(R.styleable.BigSlider_value, 0);
+			value = xml_attrs.getInt(R.styleable.BigFatSlider_value, 0);
 		}
 	}
 

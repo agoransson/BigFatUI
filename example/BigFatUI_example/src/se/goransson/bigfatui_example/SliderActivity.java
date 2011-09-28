@@ -1,6 +1,6 @@
 package se.goransson.bigfatui_example;
 
-import se.goransson.bigfatui.BigSlider;
+import se.goransson.bigfatui.BigFatSlider;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +22,10 @@ public class SliderActivity extends Activity {
 
 		textView = (TextView) findViewById(R.id.textView1);
 
-		BigSlider[] sliders = new BigSlider[3];
-		sliders[0] = (BigSlider) findViewById(R.id.bigSlider1);
-		sliders[1] = (BigSlider) findViewById(R.id.bigSlider2);
-		sliders[2] = (BigSlider) findViewById(R.id.bigSlider3);
+		BigFatSlider[] sliders = new BigFatSlider[3];
+		sliders[0] = (BigFatSlider) findViewById(R.id.bigFatSlider1);
+		sliders[1] = (BigFatSlider) findViewById(R.id.bigFatSlider2);
+		sliders[2] = (BigFatSlider) findViewById(R.id.bigFatSlider3);
 
 		for (int i = 0; i < sliders.length; i++)
 			sliders[i].setCallbackHandler(mHandler);
@@ -62,7 +62,7 @@ public class SliderActivity extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case BigSlider.CALLBACK:
+			case BigFatSlider.CALLBACK:
 				// arg1 contains the value!
 				textView.setText(Integer.toString(msg.arg1));
 				break;

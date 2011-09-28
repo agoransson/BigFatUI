@@ -37,7 +37,7 @@ import android.view.View;
  * @author Andreas Göransson
  * 
  */
-public class BigProgressbar extends View {
+public class BigFatProgressbar extends View {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "BigProgressbar";
@@ -59,15 +59,15 @@ public class BigProgressbar extends View {
 	private Paint progress_text_paint;
 	private boolean countdown = false;
 
-	public BigProgressbar(Context context) {
+	public BigFatProgressbar(Context context) {
 		this(context, null);
 	}
 
-	public BigProgressbar(Context context, AttributeSet attrs) {
+	public BigFatProgressbar(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public BigProgressbar(Context context, AttributeSet attrs, int defStyle) {
+	public BigFatProgressbar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
 		mContext = context;
@@ -107,23 +107,23 @@ public class BigProgressbar extends View {
 		/* Try loading xml attrs (if any set they should overwrite the default) */
 		if (attrs != null) {
 			TypedArray xml_attrs = mContext.obtainStyledAttributes(attrs,
-					R.styleable.BigProgressbar);
+					R.styleable.BigFatProgressbar);
 
 			// Load progress drawable
-			if (xml_attrs.getDrawable(R.styleable.BigProgressbar_progressdrawable) != null)
+			if (xml_attrs.getDrawable(R.styleable.BigFatProgressbar_progressdrawable) != null)
 				progress = xml_attrs
-						.getDrawable(R.styleable.BigProgressbar_progressdrawable);
+						.getDrawable(R.styleable.BigFatProgressbar_progressdrawable);
 
 			// Load text size
 			progress_text_paint.setTextSize(progress_font_size = xml_attrs.getInt(
-					R.styleable.BigProgressbar_textsize, progress_font_size));
+					R.styleable.BigFatProgressbar_textsize, progress_font_size));
 			// ...and update text padding
 			fm = progress_text_paint.getFontMetrics();
 			text_padding_y = (int) fm.descent;
 			text_padding_x = 0;
 
 			// Reversed?
-			countdown = xml_attrs.getBoolean(R.styleable.BigProgressbar_countdown,
+			countdown = xml_attrs.getBoolean(R.styleable.BigFatProgressbar_countdown,
 					false);
 		}
 	}
@@ -191,6 +191,7 @@ public class BigProgressbar extends View {
 		// Draw text
 		canvas.drawText(progress_text, getWidth() / 2 + text_padding_x,
 				progress_font_size, progress_text_paint);
+
 		super.onDraw(canvas);
 	}
 
@@ -215,7 +216,10 @@ public class BigProgressbar extends View {
 		// Used for EditMode (No need to do the calculation if not in editmode)
 		int w = 0, h = 0;
 		if (isInEditMode()) {
-			w = (int) (progress_text_paint.measureText(progress_text) + (2 * text_padding_x));
+			w = (int) ((progress_text_paint.measureText(progress_text) + (2 * text_padding_x)) > getBackground()
+					.getIntrinsicWidth() ? (progress_text_paint
+					.measureText(progress_text) + (2 * text_padding_x)) : getBackground()
+					.getIntrinsicWidth());
 			h = (int) (progress_font_size + text_padding_y);
 		}
 

@@ -10,24 +10,24 @@
 		android:layout_width="match_parent" android:textColor="#000"
 		android:layout_margin="10dp" android:gravity="center"></TextView>
 
-	<se.goransson.bigfatui.BigSlider
-		android:id="@+id/bigSlider1" android:layout_height="100dp"
+	<se.goransson.bigfatui.BigFatSlider
+		android:id="@+id/bigFatSlider1" android:layout_height="100dp"
 		android:layout_width="250dp" android:layout_gravity="center"
-		bigfatui:min="-100" bigfatui:max="100"></se.goransson.bigfatui.BigSlider>
+		bigfatui:min="-100" bigfatui:max="100"></se.goransson.bigfatui.BigFatSlider>
 
 	<LinearLayout android:id="@+id/linearLayout1"
 		android:layout_width="match_parent" android:layout_margin="10dp"
 		android:layout_height="50dp">
 
-		<se.goransson.bigfatui.BigSlider
-			android:id="@+id/bigSlider2" android:layout_height="wrap_content"
+		<se.goransson.bigfatui.BigFatSlider
+			android:id="@+id/bigFatSlider2" android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:layout_weight="1"
-			bigfatui:value="33" bigfatui:filldrawable="@drawable/mysliderfilldrawable"></se.goransson.bigfatui.BigSlider>
+			bigfatui:value="33" bigfatui:filldrawable="@drawable/mysliderfilldrawable"></se.goransson.bigfatui.BigFatSlider>
 
-		<se.goransson.bigfatui.BigSlider
-			android:id="@+id/bigSlider3" android:layout_height="wrap_content"
+		<se.goransson.bigfatui.BigFatSlider
+			android:id="@+id/bigFatSlider3" android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:layout_weight="1"
-			bigfatui:value="66" bigfatui:sliderdrawable="@drawable/mysliderdrawable"></se.goransson.bigfatui.BigSlider>
+			bigfatui:value="66" bigfatui:sliderdrawable="@drawable/mysliderdrawable"></se.goransson.bigfatui.BigFatSlider>
 
 	</LinearLayout>
 

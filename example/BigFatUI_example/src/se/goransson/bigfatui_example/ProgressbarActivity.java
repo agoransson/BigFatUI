@@ -1,6 +1,6 @@
 package se.goransson.bigfatui_example;
 
-import se.goransson.bigfatui.BigProgressbar;
+import se.goransson.bigfatui.BigFatProgressbar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,20 +11,20 @@ import android.view.MenuItem;
 
 public class ProgressbarActivity extends Activity {
 
-	BigProgressbar small, big;
+	BigFatProgressbar small, big;
 
-	BigProgressbar reversed1, reversed2;
+	BigFatProgressbar reversed1, reversed2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.progressbars);
 
-		small = (BigProgressbar) findViewById(R.id.bigProgressbar1);
-		big = (BigProgressbar) findViewById(R.id.bigProgressbar2);
+		small = (BigFatProgressbar) findViewById(R.id.bigFatProgressbar1);
+		big = (BigFatProgressbar) findViewById(R.id.bigFatProgressbar2);
 
-		reversed1 = (BigProgressbar) findViewById(R.id.bigProgressbar3);
-		reversed2 = (BigProgressbar) findViewById(R.id.bigProgressbar4);
+		reversed1 = (BigFatProgressbar) findViewById(R.id.bigFatProgressbar3);
+		reversed2 = (BigFatProgressbar) findViewById(R.id.bigFatProgressbar4);
 	}
 
 	@Override
