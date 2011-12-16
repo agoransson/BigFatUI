@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:bigfatui="http://schemas.android.com/apk/res/se.goransson.bigfatui_example"
-	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:background="#efefef">
-    <se.goransson.bigfatui.BigFatImageButton android:id="@+id/bigFatImageButton1" android:layout_width="wrap_content" android:layout_height="wrap_content"></se.goransson.bigfatui.BigFatImageButton>
-    <se.goransson.bigfatui.BigFatTurner android:id="@+id/bigFatTurner1" android:layout_width="wrap_content" android:layout_height="wrap_content"></se.goransson.bigfatui.BigFatTurner>
-    <se.goransson.bigfatui.BigFatProgressbar android:id="@+id/bigFatProgressbar1" android:layout_width="wrap_content" android:layout_height="wrap_content"></se.goransson.bigfatui.BigFatProgressbar>
-    <se.goransson.bigfatui.BigFatSlider android:id="@+id/bigFatSlider1" android:layout_width="wrap_content" android:layout_height="wrap_content"></se.goransson.bigfatui.BigFatSlider>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bigfatui="http://schemas.android.com/apk/res/se.goransson.bigfatui_example"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef" >
 
-</LinearLayout>
+    <se.goransson.bigfatui.BigFatTurner
+        android:id="@+id/bigFatTurner1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true" >
+
+    </se.goransson.bigfatui.BigFatTurner>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bigFatTurner1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000" />
+
+</RelativeLayout>

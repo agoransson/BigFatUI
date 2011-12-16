@@ -46,6 +46,10 @@
 	</declare-styleable>
 	
 	<declare-styleable name="BigFatTurner">
+		<attr format="integer" name="fill" />
 		<attr format="integer" name="handle" />
+		<attr format="integer" name="padding" />
+		<attr format="integer" name="max_value" />
+		<attr format="integer" name="min_value" />
 	</declare-styleable>
 </resources>
